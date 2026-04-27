@@ -11,7 +11,7 @@
 ### 1. Clone the plugin
 
 ```bash
-git clone https://github.com/<your-username>/ai-job-assistant \
+git clone https://github.com/pjetja/ai-job-assistant \
   ~/.claude/plugins/ai-job-assistant
 ```
 
