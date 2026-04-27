@@ -19,12 +19,12 @@ CV review, job matching, application tracking, and interview preparation.
 | `/aja-generate-cv [role]` | Generate optimized CV from review outputs |
 | `/aja-generate-cv-pdf [role]` | Render CV HTML to PDF |
 | `/aja-match-job <url> [role] [--full]` | Score a job posting against your CVs |
-| `/aja-job-cv <job-id> <role>` | Create a job-specific CV variant |
-| `/aja-track <url> <role>` | Track a new job application |
+| `/aja-job-cv [number] <role>` | Create a job-specific CV variant |
+| `/aja-track <url> <role> [number]` | Track a new job application |
 | `/aja-update <id> <field> <value>` | Update application status |
 | `/aja-dashboard` | Regenerate the HTML application dashboard |
-| `/aja-prep <job-id> [stage]` | Prepare for an interview (stage: hr/tech/non-tech) |
-| `/aja-post-interview <job-id>` | Run post-interview debrief and KB update |
+| `/aja-prep [number] [stage]` | Prepare for an interview (stage: hr/tech/non-tech) |
+| `/aja-post-interview [number] [stage]` | Run post-interview debrief and KB update |
 
 ## Installation
 
@@ -80,9 +80,9 @@ The assistant fetches the posting, identifies required skills, and produces a sc
 
 If you want a version of your CV tailored specifically to this posting:
 ```
-/aja-job-cv 001-company-role "Senior Software Engineer"
+/aja-job-cv 1 "Senior Software Engineer"
 ```
-Use the job ID shown at the end of Step 1. The assistant rewrites your summary and reorders your experience bullets to match this job's requirements.
+Use the job number shown at the end of Step 1. Or omit it entirely — the assistant will show you a list to pick from. It rewrites your summary and reorders your experience bullets to match this job's requirements.
 
 ---
 
@@ -94,9 +94,9 @@ Keep all your applications in one place. A Markdown table is the source of truth
 ```
 /aja-track https://example.com/jobs/some-role "Senior Software Engineer"
 ```
-If you already ran `/aja-match-job` for this job, pass the job ID as a third argument to link them:
+If you already ran `/aja-match-job` for this job, pass its sequence number as a third argument to link them:
 ```
-/aja-track https://example.com/jobs/some-role "Senior Software Engineer" 001-company-role
+/aja-track https://example.com/jobs/some-role "Senior Software Engineer" 1
 ```
 
 **Step 2 — Update status as things progress**
@@ -125,9 +125,9 @@ Then open `~/JOB_ASSISTANT_DATA/tracker/applications.html` in your browser. It h
 
 **Before the interview — run prep**
 ```
-/aja-prep 001-company-role tech
+/aja-prep 1 tech
 ```
-Replace `tech` with `hr` or `non-tech` depending on the stage. The assistant will:
+Use the job's sequence number (or omit it to get an interactive picker). Replace `tech` with `hr` or `non-tech` depending on the stage. The assistant will:
 1. Research the company (news, tech stack, culture, salary estimates)
 2. Show you a full CV-vs-job skills breakdown so you know what to emphasize
 3. Generate a question list — drawing from your local knowledge base first, then creating tailored questions for this specific role
@@ -136,8 +136,9 @@ All output is saved so you can review it offline before the interview.
 
 **After the interview — run the debrief**
 ```
-/aja-post-interview 001-company-role tech
+/aja-post-interview 1 tech
 ```
+Again, omit the number to get the interactive picker.
 The assistant asks you to describe what was discussed — topics, questions you struggled with, technologies that came up. From your notes it:
 1. Adds new flashcard entries to your local knowledge base so you're better prepared next time
 2. Identifies CV gaps uncovered by the interview and suggests specific improvements

@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.1 — UX: Job picker and numeric job references
+- `aja-job-cv`, `aja-track`, `aja-prep`, `aja-post-interview` now accept a short sequence number (`1`, `2`, `3`) instead of the internal job slug
+- All four commands show an interactive numbered picker when no job number is provided
+- README usage guide updated with new argument format
+
 ## v0.4.0 — Phase D: Interview Prep + Post-Interview
 - `/aja-prep` — full interview preparation flow (company research, CV match, question generation)
 - `/aja-post-interview` — post-interview debrief, KB update, CV gap suggestions

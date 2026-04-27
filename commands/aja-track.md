@@ -4,16 +4,16 @@ Log a new job application to the tracker.
 
 ## Arguments
 
-`$ARGUMENTS` contains: `<job-url> <role> [job-id]`
+`$ARGUMENTS` contains: `<job-url> <role> [job-number]`
 
 - `job-url` — required. URL of the job posting.
-- `role` — required. Which CV was / will be sent (e.g. "Senior Frontend Developer").
-- `job-id` — optional. If the job was already analyzed with `/aja-match-job`, pass the job ID (e.g. `007-stripe-senior-fe`). This links the tracker row to the match report.
+- `role` — required. Which CV was / will be sent (e.g. "Senior Software Engineer").
+- `job-number` — optional. If the job was already analyzed with `/aja-match-job`, pass its sequence number (e.g. `2`). This links the tracker row to the match report.
 
 Examples:
 ```
-/aja-track https://example.com/jobs/123 "Senior Frontend Developer"
-/aja-track https://example.com/jobs/123 "Senior Frontend Developer" 007-stripe-senior-fe
+/aja-track https://example.com/jobs/123 "Senior Software Engineer"
+/aja-track https://example.com/jobs/123 "Senior Software Engineer" 2
 ```
 
 ## Config
@@ -23,22 +23,29 @@ Extract: `data_dir`.
 
 Tracker file: `{data_dir}/tracker/applications.md`
 
-## Step 1 — Check for duplicate
+## Step 1 — Resolve job-number (if provided)
+
+If `job-number` is given:
+- List directories under `{data_dir}/jobs/` sorted alphabetically.
+- Select the Nth directory (1-indexed). Set `job_id` to that directory name.
+- Verify `{data_dir}/jobs/{job_id}/job.md` exists. If not: warn "Job number {N} not found — linking skipped." and clear `job_id`.
+
+## Step 2 — Check for duplicate
 
 Read `applications.md` if it exists.
 Search all rows for the job URL. If found: "Already tracked: {job name} (row #{id}). Use /aja-update to update status." and stop.
 
-## Step 2 — Fetch job info
+## Step 3 — Fetch job info
 
 Try to get the job title and company name:
-1. If `job-id` is provided and `{data_dir}/jobs/{job-id}/job.md` exists: read `role_title` and `company_name` from there.
+1. If `job_id` is resolved and `{data_dir}/jobs/{job_id}/job.md` exists: read `role_title` and `company_name` from there.
 2. Otherwise: invoke `aja-fetch-job` skill to fetch the URL, extract title and company. If fetch fails, use `?` as placeholder and note it.
 
-## Step 3 — Assign ID
+## Step 4 — Assign ID
 
 Count existing data rows in `applications.md` (lines starting with `| ` that are not header/separator). New ID = count + 1.
 
-## Step 4 — Append row
+## Step 5 — Append row
 
 Initialize `applications.md` with header if file is empty or missing:
 
@@ -64,10 +71,10 @@ Also append to `## History` section (create if missing):
 - {YYYY-MM-DD}: Application sent with {role} CV
 ```
 
-## Step 5 — Regenerate HTML
+## Step 6 — Regenerate HTML
 
 Invoke the `aja-dashboard` command instructions (generate HTML from updated MD).
 
-## Step 6 — Confirm
+## Step 7 — Confirm
 
 Print: `Logged #{id}: {job_title} — {company} ({role}, {date})`
