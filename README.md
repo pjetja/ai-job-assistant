@@ -8,7 +8,7 @@ CV review, job matching, application tracking, and interview preparation.
 - **CV Review** — AI HR Reviewer analyzes your CV for a target role; HR Consultant discusses improvements interactively
 - **Job Matching** — Score any job posting against your CVs, get gap analysis and intro suggestions
 - **Application Tracking** — Track every application with status history and a generated HTML dashboard
-- **Interview Prep** — Company research, role-specific questions, and a local flashcard knowledge base
+- **Interview Prep** — Company research, role-specific questions, a local flashcard knowledge base, and an optional self-contained HTML prep sheet with collapsible question cards, match score, and company talking points
 - **Post-Interview** — Update your KB and get CV improvement suggestions after each interview
 
 ## Commands
@@ -23,7 +23,7 @@ CV review, job matching, application tracking, and interview preparation.
 | `/aja-track <url> <role> [number]` | Track a new job application |
 | `/aja-update <id> <field> <value>` | Update application status |
 | `/aja-dashboard` | Regenerate the HTML application dashboard |
-| `/aja-prep [number] [stage]` | Prepare for an interview (stage: hr/tech/non-tech) |
+| `/aja-prep [number] [stage] [--html]` | Prepare for an interview (stage: hr/tech/non-tech); add `--html` to generate a visual prep sheet |
 | `/aja-post-interview [number] [stage]` | Run post-interview debrief and KB update |
 
 ## Installation
@@ -133,6 +133,19 @@ Use the job's sequence number (or omit it to get an interactive picker). Replace
 3. Generate a question list — drawing from your local knowledge base first, then creating tailored questions for this specific role
 
 All output is saved so you can review it offline before the interview.
+
+**Generate a visual prep sheet (optional)**
+```
+/aja-prep 1 hr --html
+```
+Add `--html` to produce a self-contained HTML file saved alongside the other prep files. It contains:
+- Collapsible question cards with short and detailed answers
+- Match score breakdown with progress bars per dimension
+- Top strengths and gaps with suggested framing
+- Company overview and talking points
+- A suggested opening line for the interview
+
+Open `~/JOB_ASSISTANT_DATA/jobs/{job-id}/prep-{stage}.html` in any browser — no internet connection needed.
 
 **After the interview — run the debrief**
 ```
