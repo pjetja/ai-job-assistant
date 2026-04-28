@@ -6,56 +6,111 @@
 <title>{{NAME}} — {{ROLE}}</title>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #222; background: #fff; }
-.page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 18mm 16mm 14mm; }
-h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.3px; }
-.role-title { font-size: 13px; color: #555; margin-top: 2px; }
-.contact { font-size: 12px; color: #555; margin-top: 6px; }
-.contact a { color: #2d3a4a; text-decoration: none; }
-hr { border: none; border-top: 1.5px solid #2d3a4a; margin: 10px 0; }
-h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #2d3a4a; font-weight: 700; margin: 14px 0 6px; }
-p, li { font-size: 12.5px; line-height: 1.55; }
-ul { padding-left: 18px; }
-.two-col { display: grid; grid-template-columns: 62% 35%; gap: 3%; }
-.section { margin-bottom: 10px; }
-.job-title { font-weight: 700; font-size: 13px; }
-.job-company { font-size: 12px; color: #555; }
-.job-date { font-size: 11px; color: #777; float: right; }
-.skills-list { display: flex; flex-wrap: wrap; gap: 4px 8px; list-style: none; padding: 0; }
-.skills-list li { background: #eef1f5; padding: 2px 8px; border-radius: 4px; font-size: 11.5px; }
-.gdpr { margin-top: 18px; font-size: 10px; color: #aaa; border-top: 1px solid #eee; padding-top: 8px; }
-@media print { .page { width: 100%; padding: 14mm 12mm; } }
+body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; display: flex; min-height: 100vh; color: #333; font-size: 13px; }
+.main { flex: 1; padding: 30px 34px; background: #fff; }
+.sidebar { width: 250px; min-width: 250px; background: #2d3a4a; color: #fff; padding: 28px 20px; display: flex; flex-direction: column; gap: 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.photo-wrap { display: flex; justify-content: center; padding: 6px 0 2px; }
+.photo { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.15); }
+.sb-section h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 9px; padding-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.25); }
+.contact-item { margin-bottom: 7px; }
+.contact-label { font-size: 9.5px; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.5); letter-spacing: 0.4px; }
+.contact-value { font-size: 11px; color: rgba(255,255,255,0.9); line-height: 1.4; }
+.contact-value a { color: rgba(255,255,255,0.9); text-decoration: none; }
+.edu-year { font-size: 10.5px; color: rgba(255,255,255,0.55); }
+.edu-degree { font-size: 11.5px; font-weight: 600; color: #fff; margin: 2px 0 1px; }
+.edu-school { font-size: 10.5px; color: rgba(255,255,255,0.8); }
+.edu-faculty { font-size: 10px; color: rgba(255,255,255,0.6); }
+.sb-section ul { list-style: none; }
+.sb-section ul li { font-size: 11px; color: rgba(255,255,255,0.85); padding: 2px 0; line-height: 1.45; }
+.sb-section ul li::before { content: '·'; margin-right: 6px; color: rgba(255,255,255,0.4); }
+.name-block { margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid #2d3a4a; }
+.name { font-size: 34px; font-weight: 300; color: #1a2a3a; line-height: 1.1; }
+.name strong { font-weight: 800; }
+.job-title { font-size: 11.5px; letter-spacing: 3.5px; text-transform: uppercase; color: #777; margin-top: 5px; }
+.section { margin-bottom: 20px; }
+.section h2 { font-size: 16px; font-weight: 700; color: #1a2a3a; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1.5px solid #e8e8e8; }
+.summary { font-size: 12px; line-height: 1.75; color: #444; }
+.company-block { margin-bottom: 14px; }
+.company-header { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 5px; }
+.c-dot { width: 11px; height: 11px; min-width: 11px; border-radius: 50%; border: 2px solid #2d3a4a; background: #fff; margin-top: 3px; }
+.company-name { font-size: 15.5px; font-weight: 700; color: #2d3a4a; }
+.company-meta { font-size: 10.5px; color: #888; }
+.role-block { display: flex; align-items: flex-start; gap: 9px; margin-left: 5px; margin-bottom: 9px; }
+.r-dot { width: 9px; height: 9px; min-width: 9px; border-radius: 50%; background: #2d3a4a; margin-top: 4px; flex-shrink: 0; }
+.role-content { flex: 1; }
+.role-title { font-size: 12.5px; font-weight: 600; color: #222; }
+.role-date { font-size: 10.5px; color: #888; margin: 1px 0 4px; }
+.role-bullets { font-size: 11px; color: #444; padding-left: 13px; line-height: 1.65; }
+.role-bullets li { margin-bottom: 2px; }
+.gdpr { font-size: 7.5px; color: #bbb; margin-top: 28px; padding-top: 8px; border-top: 1px solid #eee; line-height: 1.5; }
+@media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } }
 </style>
 </head>
 <body>
-<div class="page">
-  <h1>{{NAME}}</h1>
-  <div class="role-title">{{ROLE}}</div>
-  <div class="contact">{{EMAIL}} · {{PHONE}} · {{LOCATION}} · <a href="{{LINKEDIN}}">LinkedIn</a> · <a href="{{GITHUB}}">GitHub</a></div>
-  <hr>
-  <div class="two-col">
-    <div>
-      <div class="section">
-        <h2>Professional Summary</h2>
-        <p>{{SUMMARY}}</p>
-      </div>
-      <div class="section">
-        <h2>Experience</h2>
-        {{EXPERIENCE}}
-      </div>
+
+<div class="sidebar">
+  <div class="photo-wrap">
+    <img class="photo" src="{{GRAVATAR_URL}}" alt="{{NAME}}">
+  </div>
+
+  <div class="sb-section">
+    <h3>Contact</h3>
+    <div class="contact-item">
+      <div class="contact-label">Email</div>
+      <div class="contact-value">{{EMAIL}}</div>
     </div>
-    <div>
-      <div class="section">
-        <h2>Skills</h2>
-        <ul class="skills-list">{{SKILLS}}</ul>
-      </div>
-      <div class="section">
-        <h2>Education</h2>
-        {{EDUCATION}}
-      </div>
+    <div class="contact-item">
+      <div class="contact-label">Phone</div>
+      <div class="contact-value">{{PHONE}}</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">LinkedIn</div>
+      <div class="contact-value"><a href="{{LINKEDIN}}">{{LINKEDIN_LABEL}}</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Location</div>
+      <div class="contact-value">{{LOCATION}}</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Work Mode</div>
+      <div class="contact-value">{{WORK_MODE}}</div>
     </div>
   </div>
+
+  <div class="sb-section">
+    <h3>Education</h3>
+    {{EDUCATION}}
+  </div>
+
+  <div class="sb-section">
+    <h3>Skills</h3>
+    <ul>{{SKILLS}}</ul>
+  </div>
+
+  <div class="sb-section">
+    <h3>Languages</h3>
+    <ul>{{LANGUAGES}}</ul>
+  </div>
+</div>
+
+<div class="main">
+  <div class="name-block">
+    <div class="name"><strong>{{NAME_FIRST}}</strong> {{NAME_LAST}}</div>
+    <div class="job-title">{{ROLE}}</div>
+  </div>
+
+  <div class="section">
+    <h2>Professional Summary</h2>
+    <p class="summary">{{SUMMARY}}</p>
+  </div>
+
+  <div class="section">
+    <h2>Experience</h2>
+    {{EXPERIENCE}}
+  </div>
+
   <p class="gdpr">{{GDPR}}</p>
 </div>
+
 </body>
 </html>

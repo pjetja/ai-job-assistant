@@ -56,14 +56,21 @@ Read `templates/cv.html` from the plugin directory.
 (Plugin directory is the directory containing this commands/ folder — go up one level.)
 
 Fill in template placeholders using data from `cv.md` and config:
-- `{{NAME}}` → name from config
+- `{{NAME}}` → full name from config (e.g. "Piotr Sowiński")
+- `{{NAME_FIRST}}` → first word of name (e.g. "Piotr")
+- `{{NAME_LAST}}` → remaining words of name (e.g. "Sowiński")
 - `{{ROLE}}` → target role name
 - `{{EMAIL}}` → email from config
-- `{{PHONE}}`, `{{LOCATION}}`, `{{LINKEDIN}}`, `{{GITHUB}}` → from source CV or ask user if not found
+- `{{PHONE}}`, `{{LOCATION}}` → from source CV or ask user if not found
+- `{{LINKEDIN}}` → full LinkedIn URL from source CV
+- `{{LINKEDIN_LABEL}}` → human-readable LinkedIn label (strip https:// and trailing slash)
+- `{{WORK_MODE}}` → work mode preference from source CV (e.g. "Remote-first; open to hybrid.")
+- `{{GRAVATAR_URL}}` → compute MD5 hash of lowercase trimmed email, build URL: `https://www.gravatar.com/avatar/{hash}?s=200`
 - `{{SUMMARY}}` → Professional Summary from cv.md
-- `{{EXPERIENCE}}` → each role as `<div class="job-entry">` with title, company, date, bullets
-- `{{SKILLS}}` → each skill as `<li>skill</li>` in the skills-list
-- `{{EDUCATION}}` → education section
+- `{{EXPERIENCE}}` → experience rendered as `.company-block` / `.role-block` HTML using the pattern in templates/cv.html
+- `{{SKILLS}}` → each skill as `<li>skill</li>`
+- `{{EDUCATION}}` → education rendered using `.edu-year` / `.edu-degree` / `.edu-school` / `.edu-faculty` divs
+- `{{LANGUAGES}}` → each language as `<li>Language — Level</li>`
 - `{{GDPR}}` → GDPR footer text if present
 
 Save to `cvs/{role_slug}/cv.html`.
