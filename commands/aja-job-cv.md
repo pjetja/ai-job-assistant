@@ -4,15 +4,15 @@ Generate a job-specific CV variant for a given job posting and role.
 
 ## Arguments
 
-`$ARGUMENTS` contains: `[job-number] <role>`
+`$ARGUMENTS` contains: `[tracker-id] <role>`
 
-- `job-number` — optional. The sequence number of the job (e.g. `2`). If omitted, an interactive picker is shown.
+- `tracker-id` — optional. The `#` from the tracker table (e.g. `40`). If omitted, an interactive picker is shown.
 - `role` — required. Which CV to base the variant on.
 
 Examples:
 ```
 /aja-job-cv "Software Architect"
-/aja-job-cv 2 "Software Architect"
+/aja-job-cv 40 "Software Architect"
 ```
 
 ## Config
@@ -21,24 +21,29 @@ Read config as usual. Extract `data_dir`.
 
 ## Step 1 — Resolve job
 
-List all directories under `{data_dir}/jobs/` sorted alphabetically (zero-padded names give chronological order).
+Read `{data_dir}/tracker/applications.md`. If missing: "No applications found. Run /aja-track first." and stop.
 
 If the first token of `$ARGUMENTS` is a number N:
-- Select the Nth directory (1-indexed). That directory name is `job_id`.
+- Find the row where `#` column equals N. If not found: "Application #N not found in tracker." and stop.
+- Extract `job_url` from the markdown link in the Job Name column.
+- Extract `job_id` from the Job ID column (may be `-`).
 - Remaining tokens are the `role` argument.
 
 If the first token is not a number (or no argument given):
-- Print a numbered list:
+- Print all non-rejected tracker rows (Rejected column = `-`):
   ```
-  Jobs:
-    1. Senior Software Engineer at Stripe — 2026-04-25
-    2. Software Architect at Revolut — 2026-04-26
-  Which job? (enter number)
+  Applications:
+    2. Senior Frontend AI Developer at Remodevs — sent 2026-04-08
+    26. FE Software Engineer at Bnewable BV — sent 2026-04-09
+  Which application? (enter #)
   ```
-  Read role title and company from each job's `job.md`. Wait for user to enter a number. Set `job_id` to the selected directory name.
+  Wait for user to enter a number. Extract `job_url` and `job_id` from that row.
 - If `role` was not already in `$ARGUMENTS`, ask: "Which role CV to use?" and list available `cvs/*/cv.md`.
 
-If `{data_dir}/jobs/` is empty or missing: "No jobs found. Run /aja-match-job first." and stop.
+If `job_id` is `-`:
+- Run `aja-match-job` inline: fetch `job_url`, create the job directory, score CVs, save match reports.
+- `aja-match-job` will update the tracker row's `Job ID` column automatically (Step 3b).
+- Re-read the tracker row to get the updated `job_id`.
 
 ## Step 2 — Check prerequisites
 

@@ -51,6 +51,15 @@ Invoke `aja-analyze-job` skill with:
 
 Saves `{data_dir}/jobs/{job_id}/job.md`.
 
+## Step 3b — Link to tracker
+
+Read `{data_dir}/tracker/applications.md`.
+Search all rows for `job_url` in the Job Name column (markdown link href).
+If a matching row is found and its `Job ID` column is `-`:
+- Update that row's `Job ID` cell to `{job_id}`.
+- Append to `## History` under that application's comment:
+  `- {YYYY-MM-DD}: Job analysis linked → {job_id}`
+
 ## Step 4 — Score CVs
 
 Find CVs to score:
@@ -143,7 +152,8 @@ End with:
 ```
 Saved to jobs/{job_id}/
   match-short.md {if --full: and match-full.md}
+{if tracker row was found and linked: Tracker row #{tracker_id} updated — Job ID set to {job_id}}
 
-To create a job-specific CV: /aja-job-cv {job_id} "{best_role}"
-To track your application: /aja-track {job_url} "{best_role}"
+To create a job-specific CV: /aja-job-cv {tracker_id} "{best_role}"
+To prepare for interview: /aja-prep {tracker_id} hr
 ```
