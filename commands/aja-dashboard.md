@@ -33,6 +33,7 @@ For each data row produce a `<tr>`:
 - Job Name → `<td class="job"><a href="{url}" target="_blank">{title}</a></td>` or `<td class="job"><span>{title}</span></td>` if no URL
 - Company → `<td class="company">{company}</td>`
 - CV → `<td class="cv"><span class="badge-cv">{cv}</span></td>`
+- Prep → `<td class="prep">{links}</td>` — for each `prep-{stage}.html` found in `{data_dir}/jobs/{job_id}/`, render `<a href="file://{path}" target="_blank" class="badge-prep badge-prep-{stage}">{Stage}</a>` (stages: hr → HR, tech → Tech, non-tech → HM). Empty cell if no job_id or no prep files.
 - Sent → `<td class="date">{sent}</td>`
 - Response → `-` → `<td class="empty">—</td>`, else `<td><span class="badge badge-responded">{value}</span></td>`
 - HR Screen → same pattern, class `badge-hr`
@@ -89,6 +90,10 @@ td.notes { color: #666; font-size: 11.5px; max-width: 160px; }
 .badge-offer-pending { background: #fff7ed; color: #c2410c; }
 .badge-offer-no { background: #fee2e2; color: #991b1b; }
 .badge-rejected { background: #fee2e2; color: #991b1b; }
+.badge-prep { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-decoration: none; margin-right: 4px; }
+.badge-prep-hr { background: #fef3c7; color: #92400e; }
+.badge-prep-tech { background: #ede9fe; color: #5b21b6; }
+.badge-prep-non-tech { background: #fce7f3; color: #9d174d; }
 </style>
 </head>
 <body>
@@ -105,7 +110,7 @@ td.notes { color: #666; font-size: 11.5px; max-width: 160px; }
   <table id="appTable">
     <thead>
       <tr>
-        <th>#</th><th>Job Name</th><th>Company</th><th>CV</th>
+        <th>#</th><th>Job Name</th><th>Company</th><th>CV</th><th>Prep</th>
         <th>Sent</th><th>Response</th><th>HR Screen</th><th>Tech Interview</th>
         <th>Non-Tech</th><th>Offer</th><th>Rejected</th><th>Notes</th>
       </tr>
