@@ -59,10 +59,6 @@ Add to `## History` under the comment for this application ID:
 - {YYYY-MM-DD today}: {field} → {value}
 ```
 
-## Step 4 — Regenerate HTML
-
-Run the dashboard generation from `aja-dashboard.md`.
-
-## Step 5 — Confirm
+## Step 4 — Confirm
 
 Print the updated row so the user can verify.

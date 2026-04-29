@@ -64,10 +64,6 @@ Also append to `## History` section (create if missing):
 - {YYYY-MM-DD}: Application sent with {role} CV
 ```
 
-## Step 5 — Regenerate HTML
-
-Invoke the `aja-dashboard` command instructions (generate HTML from updated MD).
-
-## Step 6 — Confirm
+## Step 5 — Confirm
 
 Print: `Logged #{id}: {job_title} — {company} ({role}, {date})`

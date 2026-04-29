@@ -110,7 +110,7 @@ The number `1` is the application ID shown when you ran `/aja-track`. Each updat
 
 **Step 3 — View your dashboard**
 
-The HTML dashboard is regenerated automatically after every track/update. To regenerate it manually:
+Run `/aja-dashboard` whenever you want to refresh the HTML view:
 ```
 /aja-dashboard
 ```
@@ -127,7 +127,7 @@ Then open `~/JOB_ASSISTANT_DATA/tracker/applications.html` in your browser. It h
 Use the tracker `#` for this application (or omit it to get an interactive picker). Replace `tech` with `hr` or `non-tech` depending on the stage. The assistant will:
 1. Research the company (news, tech stack, culture, salary estimates)
 2. Show you a full CV-vs-job skills breakdown so you know what to emphasize
-3. Generate a question list — drawing from your local knowledge base first, then creating tailored questions for this specific role
+3. Generate a question list — drawing from your local knowledge base first, then creating tailored questions for this specific role. New questions are saved back to the KB so your answer library grows over time.
 
 All output is saved so you can review it offline before the interview.
 
