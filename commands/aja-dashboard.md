@@ -33,7 +33,6 @@ For each data row produce a `<tr>`:
 - Job Name → `<td class="job"><a href="{url}" target="_blank">{title}</a></td>` or `<td class="job"><span>{title}</span></td>` if no URL
 - Company → `<td class="company">{company}</td>`
 - CV → `<td class="cv"><span class="badge-cv">{cv}</span></td>`
-- Job ID → `<td class="jobid">{job_id or "—"}</td>` (link to match report if file exists)
 - Sent → `<td class="date">{sent}</td>`
 - Response → `-` → `<td class="empty">—</td>`, else `<td><span class="badge badge-responded">{value}</span></td>`
 - HR Screen → same pattern, class `badge-hr`
@@ -106,7 +105,7 @@ td.notes { color: #666; font-size: 11.5px; max-width: 160px; }
   <table id="appTable">
     <thead>
       <tr>
-        <th>#</th><th>Job Name</th><th>Company</th><th>CV</th><th>Job ID</th>
+        <th>#</th><th>Job Name</th><th>Company</th><th>CV</th>
         <th>Sent</th><th>Response</th><th>HR Screen</th><th>Tech Interview</th>
         <th>Non-Tech</th><th>Offer</th><th>Rejected</th><th>Notes</th>
       </tr>
